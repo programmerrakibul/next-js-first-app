@@ -1,12 +1,22 @@
+"use client";
+
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 const Navbar = () => {
+  const pathname = usePathname();
   const navTexts = ["home", "blog post", "about us", "contact"];
   const navLinks = navTexts.map((item) => (
     <li key={item}>
       <Link
         href={item === "home" ? "/" : `/${item.replaceAll(" ", "-")}`}
-        className="capitalize font-semibold"
+        className={`capitalize font-semibold ${
+          pathname === "/"
+            ? "active"
+            : pathname === `/${item.replaceAll(" ", "-")}`
+            ? "active"
+            : ""
+        }`}
       >
         {item}
       </Link>
